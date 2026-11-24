@@ -1,0 +1,48 @@
+<section class="contacts" dir="rtl" aria-labelledby="contacts-title">
+	<header class="contacts-heading">
+		<div>
+			<p class="eyebrow"><span class="eyebrow-mark" aria-hidden="true"></span> מרכז ניהול הדיוור</p>
+			<h2 id="contacts-title">אנשי קשר</h2>
+			<p class="intro">הנמענים הרשומים לעדכוני AI News</p>
+		</div>
+		<p class="contact-count"><strong>{{ contacts.length }}</strong> אנשי קשר</p>
+	</header>
+
+	<ul class="contact-grid">
+		@for (contact of contacts; track contact.email) {
+			<li class="contact-card" [class.subscribed]="contact.mailingConsent">
+				<div class="card-topline">
+					<span class="avatar" aria-hidden="true">{{ contact.name.charAt(0) }}</span>
+					<span class="consent-status" [class.approved]="contact.mailingConsent">
+						<span class="status-dot" aria-hidden="true"></span>
+						{{ contact.mailingConsent ? 'מאושר/ת לדיוור' : 'לא מאושר/ת לדיוור' }}
+					</span>
+				</div>
+
+				<div class="contact-identity">
+					<p class="field-label">איש קשר</p>
+					<h3>{{ contact.name }}</h3>
+				</div>
+
+				<div class="contact-details">
+					<a class="detail-row" [href]="'mailto:' + contact.email">
+						<span class="detail-label">כתובת מייל</span>
+						<span class="detail-value">{{ contact.email }}</span>
+					</a>
+					@if (contact.phone) {
+						<a class="detail-row" [href]="'tel:' + contact.phone">
+							<span class="detail-label">טלפון</span>
+							<span class="detail-value">{{ contact.phone }}</span>
+						</a>
+					}
+				</div>
+
+				<footer class="card-footer">
+					<span>AI NEWS</span>
+					<span class="footer-rule" aria-hidden="true"></span>
+					<span>רשימת תפוצה</span>
+				</footer>
+			</li>
+		}
+	</ul>
+</section>
